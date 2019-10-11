@@ -151,11 +151,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
 
                     onTap: (){
+                      final snackBar = SnackBar(content: Text("Tap"));
 
+                      Scaffold.of(context).showSnackBar(snackBar);
                     },
 
+                    child: PostList(context, snapshot.data.items[index]),
                   ),
-                  PostList(context, snapshot.data.items[index]),
+
 
 //                  PostList(context),
 
