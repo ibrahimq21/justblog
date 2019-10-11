@@ -26,6 +26,7 @@ class _PostListState extends State<PostList>{
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
       child: Container(
+
         height: 150.0,
         width: double.infinity,
         color: Colors.white,

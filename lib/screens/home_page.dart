@@ -148,6 +148,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 10.0),
 
+                  GestureDetector(
+
+                    onTap: (){
+
+                    },
+
+                  ),
                   PostList(context, snapshot.data.items[index]),
 
 //                  PostList(context),
