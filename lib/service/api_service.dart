@@ -1,10 +1,28 @@
+import 'package:justblog/model/author.dart';
 import 'package:justblog/model/items.dart';
 import 'package:justblog/model/root.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class ApiService {
-  static String _url = "http://42.201.185.138/wordpress/feed/json/";
+  static String _url = "http://42.201.185.138/wordpress/json";
+
+
+
+
+
+
+
+  static Future<Author> getAuthor(int index)async{
+
+    List<Items> root = await getItems();
+
+    Author author = root[index].author;
+
+
+    return author;
+
+  }
 
 
 

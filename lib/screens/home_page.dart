@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(25.0),
         border: Border.all(
             color: Colors.white, style: BorderStyle.solid, width: 2.0),
-        image: DecorationImage(image: AssetImage(res)),
+        image: new DecorationImage(image: NetworkImage(res)),
       ),
     );
   }
@@ -123,8 +123,6 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(height: 15.0),
                               Row(
                                 children: <Widget>[
-                                  SizedBox(width: 15.0),
-                                  displayProfile("asset/image/kaycee_rice.jpg"),
                                   SizedBox(
                                       width: MediaQuery.of(context).size.width -
                                           120.0),
@@ -149,10 +147,13 @@ class _HomePageState extends State<HomePage> {
                           itemCount: snapshot.data.items.length,
                           itemBuilder: (context, index) {
                             return PostList(
-                                context, snapshot.data.items[index]);
+                                context, snapshot.data.items[index], index);
                           }
 
                           ),
+
+
+
 
                     ],
                   ),

@@ -10,9 +10,10 @@ class Items{
   String date_published;
   String date_modified;
   Author author;
+  String image;
 
   Items({this.id, this.url, this.title, this.content_html, this.content_text,
-    this.date_published, this.date_modified, this.author});
+    this.date_published, this.date_modified, this.author, this.image});
 
 
   factory Items.fromJson(Map<String, dynamic> json){
@@ -26,6 +27,8 @@ class Items{
       date_published : json['date_published'],
       date_modified : json['date_modified'],
       author : Author.fromJson(json['author']),
+      image: json['image'] as String,
+
     );
   }
 
