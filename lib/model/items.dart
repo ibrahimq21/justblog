@@ -12,7 +12,7 @@ class Items{
   Author author;
 
   Items({this.id, this.url, this.title, this.content_html, this.content_text,
-      this.date_published, this.date_modified, this.author});
+    this.date_published, this.date_modified, this.author});
 
 
   factory Items.fromJson(Map<String, dynamic> json){

@@ -10,10 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
-
-
   Widget createCircle(double height, double width, double borderRad,
       String colorHex, double opacityValue) {
     return Container(
@@ -99,80 +95,73 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement build
 
     return Scaffold(
-      body: FutureBuilder<Root>(
-        future: ApiService.getRoot(),
-        builder: (context, snapshot){
-          return ListView.separated(
-
-            itemCount: snapshot.data.items.length,
-            itemBuilder: (context, index){
-              return Column(
+        body: FutureBuilder<Root>(
+            future: ApiService.getRoot(),
+            builder: (context, snapshot) {
+              return ListView(
                 children: <Widget>[
-                  Stack(
+                  Column(
                     children: <Widget>[
-                      createHeader(),
-                      Positioned(
-                        bottom: 50.0,
-                        right: 100.0,
-                        child: createCircle(400.0, 400.0, 200.0, "#FE16D", 0.4),
-                      ),
-                      Positioned(
-                        bottom: 100.0,
-                        left: 150.0,
-                        child: createCircle(300.0, 300.0, 150.0, "#FE16D", 0.5),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Stack(
                         children: <Widget>[
-                          SizedBox(height: 15.0),
-                          Row(
+                          createHeader(),
+                          Positioned(
+                            bottom: 50.0,
+                            right: 100.0,
+                            child: createCircle(
+                                400.0, 400.0, 200.0, "#FE16D", 0.4),
+                          ),
+                          Positioned(
+                            bottom: 100.0,
+                            left: 150.0,
+                            child: createCircle(
+                                300.0, 300.0, 150.0, "#FE16D", 0.5),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              SizedBox(width: 15.0),
-                              displayProfile("asset/image/kaycee_rice.jpg"),
-                              SizedBox(
-                                  width: MediaQuery.of(context).size.width - 120.0),
-                              topNavMenuBar(),
                               SizedBox(height: 15.0),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(width: 15.0),
+                                  displayProfile("asset/image/kaycee_rice.jpg"),
+                                  SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          120.0),
+                                  topNavMenuBar(),
+                                  SizedBox(height: 15.0),
+                                ],
+                              ),
+                              SizedBox(height: 50.0),
+                              titles("${snapshot.data.title}", 30.0),
+                              SizedBox(height: 15.0),
+                              titles("${snapshot.data.description}", 23.0),
+                              SizedBox(height: 15.0),
+                              searchBar(),
+                              SizedBox(height: 10.0),
                             ],
                           ),
-                          SizedBox(height: 50.0),
-                          titles("${snapshot.data.title}", 30.0),
-                          SizedBox(height: 15.0),
-                          titles("${snapshot.data.description}", 23.0),
-                          SizedBox(height: 15.0),
-                          searchBar(),
-                          SizedBox(height: 10.0),
                         ],
                       ),
+                      SizedBox(height: 10.0),
+                      ListView.builder(
+                        shrinkWrap: true,
+                          itemCount: snapshot.data.items.length,
+                          itemBuilder: (context, index) {
+                            return PostList(
+                                context, snapshot.data.items[index]);
+                          }
+
+                          ),
+
                     ],
                   ),
-                  SizedBox(height: 10.0),
-
-                  GestureDetector(
-
-                    onTap: (){
-                      final snackBar = SnackBar(content: Text("Tap"));
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-
-                    child: PostList(context, snapshot.data.items[index]),
-                  ),
-
-
-//                  PostList(context),
-
                 ],
+
               );
-            },
-            separatorBuilder: (context, index) => Divider(),
-
-
-          );
-        }
-      )
-    );
+            }));
   }
+
   Widget itemCard(String title, String imgPath) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
@@ -201,7 +190,6 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold),
                     ),
-
                   ],
                 ),
                 SizedBox(height: 5.0),
@@ -216,8 +204,6 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 12.0),
                   ),
                 ),
-
-
               ],
             )
           ],
@@ -230,37 +216,18 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder<List<Items>>(
         future: ApiService.getItems(),
         builder: (context, snapshot) {
-
-
           return ListView.builder(
-
               itemCount: snapshot.data.length,
-
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index){
-
+              itemBuilder: (context, index) {
                 return Container(
-                  width: double.infinity,
-                  height: 100.0,
+                    width: double.infinity,
+                    height: 100.0,
 //                  padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
-                  padding: EdgeInsets.all(100),
-                  color: Colors.blueGrey,
-                  child:Text('${snapshot.data[index].title}')
-                );
-
-              }
-
-              );
-
-
-
-
-
-        }
-
-        );
-
+                    padding: EdgeInsets.all(100),
+                    color: Colors.blueGrey,
+                    child: Text('${snapshot.data[index].title}'));
+              });
+        });
   }
-
-
 }

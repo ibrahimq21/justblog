@@ -23,13 +23,19 @@ class ApiService {
   static Future<Root> getRoot() async {
     final res = await http.get(_url);
 
-    if (res.statusCode == 200) {
-      var responceJson = convert.jsonDecode(res.body);
 
-      Root root = Root.fromJson(responceJson);
-      return root;
-    } else {
-      return null;
+    try{
+        if (res.statusCode == 200) {
+        var responceJson = convert.jsonDecode(res.body);
+
+        Root root = Root.fromJson(responceJson);
+        return root;
+      } else {
+        return null;
+      }
+    } catch(ex){
+      print(ex.toString());
     }
+    return null;
   }
 }
