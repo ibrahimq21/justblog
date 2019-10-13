@@ -41,7 +41,9 @@ class _DetailPageState extends State<DetailPage>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.yellow,
+      ),
 
       body: Container(
         margin: EdgeInsets.all(10.0),
@@ -122,7 +124,7 @@ class _DetailPageState extends State<DetailPage>{
     return new GestureDetector(
       child: new Text(
         "${item.url}",
-        style: new TextStyle(color: Colors.blue),
+        style: new TextStyle(color: Colors.blueAccent),
       ),
       onTap: (){
         final snackBar = SnackBar(content: Text("Tap"));

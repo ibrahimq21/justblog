@@ -119,7 +119,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
 
-    return NoSuchMethodError != null ? Scaffold(
+    return Scaffold(
         body: FutureBuilder<Root>(
             future: ApiService.getRoot(),
             builder: (context, snapshot) {
@@ -205,7 +205,7 @@ class HomePageState extends State<HomePage> {
                 ],
 
               );
-            })):ErrorWidget(errorMessage);
+            }));
   }
 
   Widget itemCard(String title, String imgPath) {
