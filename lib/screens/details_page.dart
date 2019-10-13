@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_image/network.dart';
 import 'package:justblog/model/items.dart';
 import 'package:justblog/support/util/date_util.dart';
 class DetailPage extends StatefulWidget{
@@ -33,14 +34,6 @@ class _DetailPageState extends State<DetailPage>{
 
 
 
-
-  Widget loadImage(String imgurl){
-
-    return Image.network(imgurl);
-
-
-
-  }
 
 
 
@@ -85,8 +78,8 @@ class _DetailPageState extends State<DetailPage>{
 
     return Container(
         height: 200.0,
-        child: Image.network(
-            s,
+        child: Image(
+          image: NetworkImageWithRetry(s),
             fit: BoxFit.cover)
     );
 

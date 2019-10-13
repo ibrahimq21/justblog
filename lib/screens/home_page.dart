@@ -6,10 +6,35 @@ import 'package:justblog/service/api_service.dart';
 import 'package:justblog/utils/ColorHex.dart';
 
 class HomePage extends StatefulWidget {
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
+
+  String errorMessage;
+
+  bool downDirection = true, flag = true;
+
+  ScrollController _controller;
+
+  @override
+  void initState(){
+    super.initState();
+    _controller = ScrollController();
+  }
+
+
+  handleError(String error){
+    if(NoSuchMethodError != null){
+      setState(() {
+        errorMessage = error;
+      });
+
+    }
+  }
+
+
+
   Widget createCircle(double height, double width, double borderRad,
       String colorHex, double opacityValue) {
     return Container(
@@ -94,11 +119,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
 
-    return Scaffold(
+    return NoSuchMethodError != null ? Scaffold(
         body: FutureBuilder<Root>(
             future: ApiService.getRoot(),
             builder: (context, snapshot) {
+              if(!snapshot.hasData ){
+                return Center(
+
+                  child: CircularProgressIndicator(),
+                );
+              }
               return ListView(
+
+
                 children: <Widget>[
                   Column(
                     children: <Widget>[
@@ -120,12 +153,12 @@ class _HomePageState extends State<HomePage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              SizedBox(height: 15.0),
+                              SizedBox(height: 12.0),
                               Row(
                                 children: <Widget>[
                                   SizedBox(
                                       width: MediaQuery.of(context).size.width -
-                                          120.0),
+                                          80.0),
                                   topNavMenuBar(),
                                   SizedBox(height: 15.0),
                                 ],
@@ -142,15 +175,27 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       SizedBox(height: 10.0),
-                      ListView.builder(
-                        shrinkWrap: true,
-                          itemCount: snapshot.data.items.length,
-                          itemBuilder: (context, index) {
-                            return PostList(
-                                context, snapshot.data.items[index], index);
-                          }
+
+
+                      Column(
+                        children: <Widget>[
+
+                          ListView.builder(
+                              shrinkWrap: true,
+
+                              physics: ClampingScrollPhysics(),
+                              controller: _controller,
+                              itemCount: snapshot.data.items.length,
+                              itemBuilder: (context, index) {
+                                return PostList(
+                                    context, snapshot.data.items[index], index);
+                              }
 
                           ),
+
+                        ],
+                      ),
+
 
 
 
@@ -160,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                 ],
 
               );
-            }));
+            })):ErrorWidget(errorMessage);
   }
 
   Widget itemCard(String title, String imgPath) {
