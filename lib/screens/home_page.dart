@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:justblog/model/items.dart';
-import 'package:justblog/model/root.dart';
+import 'package:justblog/features/justblog/domain/entities/items.dart';
+import 'package:justblog/features/justblog/data/models/root.dart';
 import 'package:justblog/screens/post_list.dart';
 import 'package:justblog/service/api_service.dart';
 import 'package:justblog/utils/ColorHex.dart';
@@ -10,7 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-
   String errorMessage;
 
   bool downDirection = true, flag = true;
@@ -18,22 +17,18 @@ class HomePageState extends State<HomePage> {
   ScrollController _controller;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _controller = ScrollController();
   }
 
-
-  handleError(String error){
-    if(NoSuchMethodError != null){
+  handleError(String error) {
+    if (NoSuchMethodError != null) {
       setState(() {
         errorMessage = error;
       });
-
     }
   }
-
-
 
   Widget createCircle(double height, double width, double borderRad,
       String colorHex, double opacityValue) {
@@ -123,15 +118,12 @@ class HomePageState extends State<HomePage> {
         body: FutureBuilder<Root>(
             future: ApiService.getRoot(),
             builder: (context, snapshot) {
-              if(!snapshot.hasData ){
+              if (!snapshot.hasData) {
                 return Center(
-
                   child: CircularProgressIndicator(),
                 );
               }
               return ListView(
-
-
                 children: <Widget>[
                   Column(
                     children: <Widget>[
@@ -167,43 +159,30 @@ class HomePageState extends State<HomePage> {
                               titles("${snapshot.data.title}", 30.0),
                               SizedBox(height: 15.0),
                               titles("${snapshot.data.description}", 23.0),
-                              SizedBox(height: 15.0),
-                              searchBar(),
-                              SizedBox(height: 10.0),
+//                              SizedBox(height: 15.0),
+////                              searchBar(),
+////                              SizedBox(height: 10.0),
                             ],
                           ),
                         ],
                       ),
                       SizedBox(height: 10.0),
-
-
                       Column(
                         children: <Widget>[
-
                           ListView.builder(
                               shrinkWrap: true,
-
                               physics: ClampingScrollPhysics(),
                               controller: _controller,
                               itemCount: snapshot.data.items.length,
                               itemBuilder: (context, index) {
                                 return PostList(
                                     context, snapshot.data.items[index], index);
-                              }
-
-                          ),
-
+                              }),
                         ],
                       ),
-
-
-
-
-
                     ],
                   ),
                 ],
-
               );
             }));
   }

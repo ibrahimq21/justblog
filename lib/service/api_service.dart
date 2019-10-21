@@ -1,12 +1,11 @@
-import 'package:justblog/model/author.dart';
-import 'package:justblog/model/items.dart';
-import 'package:justblog/model/root.dart';
+import 'package:justblog/features/justblog/data/models/author.dart';
+import 'package:justblog/features/justblog/data/models/items.dart';
+import 'package:justblog/features/justblog/data/models/root.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class ApiService {
-  static String _url =
-      "https://infiloopers-justblog.000webhostapp.com/wordpress/json";
+  static String _url = "https://infiloopers-justblog.000webhostapp.com/json";
 
   static Future<Author> getAuthor(int index) async {
     List<Items> root = await getItems();
