@@ -1,9 +1,9 @@
 
 
 
-import 'package:justblog/features/justblog/domain/entities/root.dart';
+import 'package:justblog/features/justblog/domain/entities/justblog.dart';
 import 'package:meta/meta.dart';
-class JustBlogModel extends Root{
+class JustBlogModel extends JustBlog{
 
 
 

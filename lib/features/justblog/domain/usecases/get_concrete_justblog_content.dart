@@ -11,7 +11,7 @@ class GetConcreteJustBlogContent implements UseCase<JustBlogModel, Params>{
 
   final JustBlogRepository repo;
 
-  GetConcreteJustBlogContent({@required this.repo});
+  GetConcreteJustBlogContent(this.repo);
 
 
   @override
@@ -24,5 +24,9 @@ class GetConcreteJustBlogContent implements UseCase<JustBlogModel, Params>{
 class Params extends Equatable {
   final String search;
 
-  Params({@required this.search}) : super([search]);
+  Params({@required this.search});
+
+  @override
+  // TODO: implement props
+  List<String> get props => [search];
 }

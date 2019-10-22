@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image/network.dart';
-import 'package:justblog/features/justblog/data/models/items.dart';
-import 'package:justblog/support/util/date_util.dart';
+import 'package:justblog/core/util/date_util.dart';
+import 'package:justblog/features/justblog/data/models/justblog_models.dart';
+
+
 
 class DetailPage extends StatefulWidget {
   final int index;

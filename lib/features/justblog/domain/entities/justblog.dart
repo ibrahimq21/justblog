@@ -4,7 +4,7 @@
 
 import 'package:justblog/features/justblog/data/models/justblog_models.dart';
 
-class Root{
+class JustBlog{
 
   String version;
   String user_comment;
@@ -14,7 +14,7 @@ class Root{
   String description;
   List<Items> items;
 
-  Root({this.version, this.user_comment, this.home_page_url, this.feed_url,
+  JustBlog({this.version, this.user_comment, this.home_page_url, this.feed_url,
     this.title, this.description, this.items});
 
 

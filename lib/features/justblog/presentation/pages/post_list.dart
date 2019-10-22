@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:justblog/features/justblog/data/models/items.dart';
-import 'package:justblog/screens/details_page.dart';
+import 'package:justblog/features/justblog/data/models/justblog_models.dart';
+
+import 'details_page.dart';
+
+
 
 class PostList extends StatefulWidget {
   final BuildContext context;
